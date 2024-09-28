@@ -14,9 +14,15 @@ import (
 
 type GreetServer struct{}
 
-func (*GreetServer) Greet(ctx context.Context, req *connect.Request[greetv1.GreetRequest]) (*connect.Response[greetv1.GreetResponse], error) {
+func (*GreetServer) Greet(_ context.Context, req *connect.Request[greetv1.GreetRequest]) (*connect.Response[greetv1.GreetResponse], error) {
 	log.Println("Request headers: ", req.Header())
 	res := connect.NewResponse(&greetv1.GreetResponse{Greeting: fmt.Sprintf("Hello, %s!", req.Msg.Name)})
+	return res, nil
+}
+
+func (*GreetServer) Mul(_ context.Context, req *connect.Request[greetv1.MulRequest]) (*connect.Response[greetv1.MulResponse], error) {
+	log.Println("Request headers: ", req.Header())
+	res := connect.NewResponse(&greetv1.MulResponse{Result: req.Msg.InputNum * 10})
 	return res, nil
 }
 

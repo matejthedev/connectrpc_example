@@ -12,6 +12,15 @@ message GreetResponse {
   string greeting = 1;
 }
 
+message MulRequest {
+  int32 input_num = 1;
+}
+
+message MulResponse {
+  int32 result = 1;
+}
+
 service GreetService {
   rpc Greet(GreetRequest) returns (GreetResponse) {}
+  rpc Mul(MulRequest) returns (MulResponse) {}
 }
